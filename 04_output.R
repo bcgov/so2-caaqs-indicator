@@ -17,6 +17,7 @@ source("00_setup.R")
 library("readr")
 library("dplyr")
 library("tidyr")
+library("purrr")
 library("ggplot2")
 
 library("sf")
@@ -79,16 +80,18 @@ for(s in sites) {
   g1 <- plot_caaqs(so2_3yr_mgmt, id = s, id_col = "site", year_min = 2013)
   g2 <- plot_caaqs(so2_1yr_mgmt, id = s, id_col = "site", year_min = 2013)
   
-  ggsave(paste0("leaflet_map/station_plots/", s, "_3yr.svg"), g1, 
-         width = 778, height = 254, dpi = 72, units = "px", bg = "white")
-  
-  ggsave(paste0("leaflet_map/station_plots/", s, "_1yr.svg"), g2, 
-         width = 778, height = 254, dpi = 72, units = "px", bg = "white")
-  
   # Save for print version
   stn_plots[[s]][["3yr"]] <- g1
   stn_plots[[s]][["1yr"]] <- g2
 }
+
+# Save svg for leaflet maps (save each that exists)
+stn_plots %>%
+  iwalk(~ for(i in seq_along(.x)) {
+    ggsave(paste0("leaflet_map/station_plots/", .y, "_", names(.x)[i], ".svg"),
+           plot = .x[[i]], width = 778, height = 254, dpi = 72, units = "px", 
+           bg = "white")
+  })
 
 
 # Summary plot -------------------------------------------------------------
@@ -107,15 +110,15 @@ print_plots[["so2_ambient_summary_plot"]]<- g
 
 g <- achievement_map(az_data = filter(az_ambient_sf, metric == "so2_3yr"),
                      stn_data = filter(stations_sf, metric == "so2_3yr"),
-                     az_labs = "Airzones:\nSO2 3yr Air Quality Standard",
-                     stn_labs = "Monitoring Stations:\nSO2 3yr Metric (ug/m3)")
+                     az_labs = "Airzones:\nSO2 1-Hr Air Quality Standard",
+                     stn_labs = "Monitoring Stations:\nSO2 1-Hr Metric (ppb)")
 print_plots[["achievement_map_3yr"]] <- g
 
 
 g <- achievement_map(az_data = filter(az_ambient_sf, metric == "so2_1yr"),
                      stn_data = filter(stations_sf, metric == "so2_1yr"),
-                     az_labs = "Airzones:\nSO2 1yr Air Quality Standard",
-                     stn_labs = "Monitoring Stations:\nSO2 1yr Metric (ug/m3)")
+                     az_labs = "Airzones:\nSO2 Annual Air Quality Standard",
+                     stn_labs = "Monitoring Stations:\nSO2 Annual Metric (ppb)")
 print_plots[["achievement_map_1yr"]] <- g
 
 # Management figures --------------------------------------------
