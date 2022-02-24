@@ -200,16 +200,16 @@ plots[["so2_ambient_summary_plot"]]
 
 -   There are two Canadian Ambient Air Quality Standards for sulphur dioxide 
     (SO~2~). The statistical form of the SO~2~ annual
-    metric is the 3-year average of the annual average concentration of
-    SO~2~. The statistical form of the SO~2~ 24-hour metric is the
-    3-year average of the annual 98th percentile of the daily average
-    concentrations of SO~2~.
--   The SO~2~ metric for an air zone is the highest SO~2~ metric value
+    metric is the average over a single calendar year of all 1-hour average 
+    average concentration of SO~2~. The statistical form of the SO~2~ 1-hour 
+    metric is the 3-year average of the annual 99th percentile of the daily 
+    maximum 1-hour average concentrations of SO~2~.
+-   ~~The SO~2~ metric for an air zone is the highest SO~2~ metric value
     reported from monitoring stations within the air zone. Air zone
     metric values are only taken from stations reporting on two years of
     data when there are no available three-year reporting stations in
-    the air zone.
--   Only air monitoring stations with sufficient data on suphur dioxide
+    the air zone.~~
+-   Only air monitoring stations with sufficient data on sulphur dioxide
     concentrations for the `r year_range` reporting period
     were included in this indicator. Visit [Current Air Quality
     Data](http://www2.gov.bc.ca/gov/content?id=292EC5BD62A149A192B7DD2CE155E33E)
