@@ -19,6 +19,7 @@ library("dplyr")
 library("tidyr")
 library("purrr")
 library("ggplot2")
+library("ggtext") # For formatting legend titles
 
 library("sf")
 library("bcmaps")
@@ -112,17 +113,19 @@ print_plots[["so2_ambient_summary_plot"]]<- g
 # Maps -------------------------------------------------------------
 # - For print version
 
-g <- achievement_map(az_data = filter(az_ambient_sf, metric == "so2_3yr"),
-                     stn_data = filter(stations_sf, metric == "so2_3yr"),
-                     az_labs = "Airzones:\nSO2 1-Hr Air Quality Standard",
-                     stn_labs = "Monitoring Stations:\nSO2 1-Hr Metric (ppb)")
+g <- achievement_map(
+  az_data = filter(az_ambient_sf, metric == "so2_3yr"),
+  stn_data = filter(stations_sf, metric == "so2_3yr"),
+  az_labs = "**Airzones:**<br>SO<sub>2</sub> 1-Hr Air Quality Standard",
+  stn_labs = "**Monitoring Stations:**<br>SO<sub>2</sub> 1-Hr Metric (ppb)")
 print_plots[["achievement_map_3yr"]] <- g
 
 
-g <- achievement_map(az_data = filter(az_ambient_sf, metric == "so2_1yr"),
-                     stn_data = filter(stations_sf, metric == "so2_1yr"),
-                     az_labs = "Airzones:\nSO2 Annual Air Quality Standard",
-                     stn_labs = "Monitoring Stations:\nSO2 Annual Metric (ppb)")
+g <- achievement_map(
+  az_data = filter(az_ambient_sf, metric == "so2_1yr"),
+  stn_data = filter(stations_sf, metric == "so2_1yr"),
+  az_labs = "**Airzones:**<br>SO<sub>2</sub> Annual Air Quality Standard",
+  stn_labs = "**Monitoring Stations:**<br>SO<sub>2</sub> Annual Metric (ppb)")
 print_plots[["achievement_map_1yr"]] <- g
 
 # Management figures --------------------------------------------
