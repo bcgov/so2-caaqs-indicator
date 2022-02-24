@@ -29,7 +29,7 @@ versions of said packages are installed.
 
 ## Getting Help or Reporting an Issue
 
-To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/pm25-caaqs-analysis/issues/).
+To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/so2-caaqs-analysis/issues/).
 
 ## How to Contribute
 

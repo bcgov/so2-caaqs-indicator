@@ -33,7 +33,7 @@ stations_clean <- read_rds("data/datasets/stations_clean.rds")
 so2_3yr_caaqs <- so2_3yr_caaqs(so2_clean, by = "site")
 so2_3yr_mgmt <- caaqs_management(so2_3yr_caaqs)
 
-# SO2 Annual
+# SO2 Annual (1-yr)
 so2_1yr_caaqs <- so2_1yr_caaqs(so2_clean, by = "site")
 so2_1yr_mgmt <- caaqs_management(so2_1yr_caaqs)
 
