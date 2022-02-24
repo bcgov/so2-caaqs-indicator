@@ -56,15 +56,10 @@ az_ambient %>%
 
 # air management zone 
 
-az_mgmt_old <- bcdc_get_data('699be99e-a9ba-403e-b0fe-3d13f84f45ab', 
-                            resource = '700a7155-0b68-4e5a-bbe0-11d4b844ec57')
-
 az_mgmt <- read_rds("data/datasets/az_mgmt.rds") %>%
   mutate(mgmt_level = as.character(mgmt_level))
 
-setdiff(names(az_mgmt_old), names(az_mgmt))
-
-bind_rows(az_mgmt_old, az_mgmt) %>%
+az_mgmt %>%
   arrange(caaqs_year)%>% 
-  write_csv("out/databc/pm25_airzone_management_summary.csv", na = "")
+  write_csv("out/databc/so2_airzone_management_summary.csv", na = "")
 
