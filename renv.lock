@@ -602,10 +602,10 @@
     },
     "glue": {
       "Package": "glue",
-      "Version": "1.6.1",
+      "Version": "1.6.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "de07842fc27ebf60e1102091c0c85e47",
+      "Hash": "4f2596dfb05dac67b9dc558e5c6fba2e",
       "Requirements": []
     },
     "gridExtra": {
@@ -1116,9 +1116,9 @@
       "RemoteUsername": "bcgov",
       "RemoteRepo": "rcaaqs",
       "RemoteRef": "steffi-new-thresholds",
-      "RemoteSha": "7a1e582ae1a9c39e57eae5e0496c39fdafaff05b",
+      "RemoteSha": "482959d426d9b76ed9f188025c15a11c0b9a2324",
       "RemoteHost": "api.github.com",
-      "Hash": "8a1a1f9d5d204a809768b024d91f04cc",
+      "Hash": "a51e3ed1748dbdb9bc56d22779b17769",
       "Requirements": [
         "dplyr",
         "ggplot2",
