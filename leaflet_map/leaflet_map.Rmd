@@ -73,8 +73,8 @@ labels_mgmt <- management_levels %>%
          # Format the labels - add space before units, remove duplicate units
          labels = factor(labels, levels = labels),
          labels_full = labels,
-         labels_full = str_replace_all(labels_full, "(\\d+)(\\&)", "\\1 \\2"),
          labels_full = str_remove(labels_full, paste0(units_html, " ")),
+         labels_full = str_replace_all(labels_full, "(\\d+)(\\&)", "\\1 \\2"),
          metric_nice = if_else(metric == "so2_3yr", "1-Hr", "Annual")) %>%
   arrange(metric, labels) %>%
   select(metric, metric_nice, labels, colour, labels_full, units_html) %>%
