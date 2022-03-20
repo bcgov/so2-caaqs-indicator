@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.2",
+    "Version": "4.1.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -410,9 +410,9 @@
       "RemoteUsername": "steffilazerte",
       "RemoteRepo": "envreportutils",
       "RemoteRef": "master",
-      "RemoteSha": "43d8a5c11a51226459d75062d5b387a6678d7235",
+      "RemoteSha": "68fac2a17e06c373660fa23fee7b7c9deb1ef0d9",
       "RemoteHost": "api.github.com",
-      "Hash": "ff0a050ebf83ce702e34e5f297334232",
+      "Hash": "3d75858015ba2e82ecffdcf8d7258d33",
       "Requirements": [
         "dplyr",
         "extrafont",
@@ -1116,9 +1116,9 @@
       "RemoteUsername": "bcgov",
       "RemoteRepo": "rcaaqs",
       "RemoteRef": "steffi-new-thresholds",
-      "RemoteSha": "482959d426d9b76ed9f188025c15a11c0b9a2324",
+      "RemoteSha": "946b47fe11e0a946d5c922d2293421fb761aa31f",
       "RemoteHost": "api.github.com",
-      "Hash": "a51e3ed1748dbdb9bc56d22779b17769",
+      "Hash": "a80cd9cb83bf48e0522ce81a754b2b29",
       "Requirements": [
         "dplyr",
         "ggplot2",
