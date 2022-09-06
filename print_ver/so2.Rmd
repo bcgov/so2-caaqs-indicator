@@ -1,11 +1,11 @@
 ---
-topic: "air"
-header-includes:
-  - \usepackage[utf8]{inputenc}
-  - \usepackage{siunitx}
-  - \sisetup{detect-all,per-mode=symbol}
-output: pdf_document
 title: "Status of Sulphur Dioxide in B.C. (2018-2020)"
+output:
+  envreportutils.internal::print_ver: default
+  pdf_document: default
+  html_document:
+    self_contained: no
+topic: air
 ---
 
 <!--
@@ -40,6 +40,8 @@ library("ggtext") # Ensure legends in maps are formatted correctly
 
 library("rcaaqs")
 library("envreportutils")
+library("envreportutils.internal")
+
 
 knitr_latex_char <- function(x) {
   y <- gsub("\\\\", "\\\\textbackslash{}", x) # backslash has to be first!
@@ -73,7 +75,7 @@ read_rds(here("data/datasets/az_ambient.rds")) %>%
   pivot_wider(names_from = metric, values_from = caaqs_ambient)
 
 read_rds(here("data/datasets/az_mgmt.rds")) %>%
-  select(airzone, mgmt_level, rep_metric)
+  select(airzone, mgmt_level, metric)
 
 ```
 
@@ -126,19 +128,10 @@ Environment](http://www.ccme.ca).
 \end{center}
 \vspace{2mm}
 
--   **Sulphur dioxide is an air pollutant.** ~~Solid or liquid
-    particles floating in the air are called particulate matter. The
-    smallest of these particles---those that are 2.5 microns or less in
-    diameter, or less than 1/20th the width of a human hair---are called
-    sulphur dioxide (SO~2~). Sulphur dioxide comes from
-    many natural and human activities, including wildfires and emissions
-    from prescribed burning, forestry operations, residential
-    woodstoves, and transportation.^[1](#fn1)^~~
--   **Sulphur dioxide can be harmful to humans.** ~~Exposure to
-    sulphur dioxide has been associated with several serious
-    health effects including heart and lung disease.^[1](#fn1)^ Both
-    short-term (24-hour) and longer-term (a year or more) exposure to
-    sulphur dioxide can have negative effects on human health.~~
+-   **Sulphur dioxide is  a colourless gas with a pungent odour at higher concentrations.** The largest sources of SO~2~ in B.C. include the oil and gas sector, the pulp and paper sector, and metal smelters. Marine vessels and off-road
+diesel vehicles are additional sources of SO~2~.^[1](#fn1)^
+-   **Sulphur dioxide can be harmful to humans and the environment.** Short-term exposure to elevated
+    sulphur dioxide can cause difficulties breathing for asthmatics. The long-term impacts of sulphur dioxide exposure are not well understood. Increased sulphur dioxide in the environment can affect vegetation and aquatic ecosystems through acid rain deposition ^[1](#fn1)^.
 -   **Sulphur dioxide levels met the Canadian Ambient Air
     Quality Standards at `r min(print_summary$percent_achieved)`
     percent of assessed monitoring stations in B.C.** There are two standards 
@@ -203,22 +196,17 @@ plots[["so2_ambient_summary_plot"]]
     (SO~2~). The statistical form of the SO~2~ annual
     metric is the average over a single calendar year of all 1-hour average 
     average concentration of SO~2~. The statistical form of the SO~2~ 1-hour 
-    metric is the 3-year average of the annual 99th percentile of the daily 
+    metric is the average of the annual 99th percentile of the daily 
     maximum 1-hour average concentrations of SO~2~.
--   ~~The SO~2~ metric for an air zone is the highest SO~2~ metric value
-    reported from monitoring stations within the air zone. Air zone
-    metric values are only taken from stations reporting on two years of
-    data when there are no available three-year reporting stations in
-    the air zone.~~
--   Only air monitoring stations with sufficient data on sulphur dioxide
-    concentrations for the `r year_range` reporting period
+-   The SO~2~ metric for an air zone is the highest SO~2~ metric value
+    reported from monitoring stations within the air zone. 
+-   Air quality monitoring stations with at least two years of valid data from `r year_range`
     were included in this indicator. Visit [Current Air Quality
     Data](http://www2.gov.bc.ca/gov/content?id=292EC5BD62A149A192B7DD2CE155E33E)
     for a complete list of air monitoring stations across B.C.
--   ~~Data completeness and sufficiency criteria for the two SO~2~ metrics
+-   Criteria for data completeness and sufficiency of the two SO~2~ metrics
     are described in the [Guidance Document on Achievement
-    Determination: Canadian Ambient Air Quality Standards for Fine
-    Particulate Matter and Ozone (2012)](http://publications.gc.ca/pub?id=9.697756&sl=0).~~
+    Determination for Canadian Ambient Air Quality Standards for Sulphur Dioxide (2020)](https://www.ccme.ca/en/res/gdadforcaaqsforsulphurdioxide_en1.0.pdf).
     
 ### Canada-wide Air Quality Management System
 
@@ -231,10 +219,7 @@ pollutants below the Canadian Ambient Air Quality Standards.
 -   There are seven air zones in British Columbia: Coastal, Georgia
     Strait, Lower Fraser Valley, Southern Interior, Central Interior,
     Northeast and Northwest.
--   ~~The Air Zone Management Framework defines air zone management levels
-    for sulphur dioxide based on the higher of the annual and
-    1-hour sulphur dioxide levels reported from monitoring
-    stations within the air zone.~~
+-   The Air Zone Management Framework defines air zone management levels for sulphur dioxide based on the higher of the annual and 1-hour sulphur dioxide levels reported from monitoring stations within the air zone.
 -   The four management levels are (1) green (actions for keeping clean
     areas clean); (2) yellow (actions for preventing air quality
     deterioration); (3) orange (actions for preventing Canadian Ambient
@@ -244,8 +229,7 @@ pollutants below the Canadian Ambient Air Quality Standards.
     rigorous as sulphur dioxide levels approach the standard.
     Actions for each management level are detailed in the [Guidance Document on Air Zone Management (2019)
     (PDF)](https://ccme.ca/en/res/guidancedocumentonairzonemanagement_secured.pdf).
--   The Southern Interior, Central Interior, and Northeast air zones were 
-    assigned to a yellow management level, and the Coastal, Georgia Strait and
+-   The Southern Interior was the only air zone assigned to a red management level.  Central Interior and Northeast air zones were assigned to a yellow management level, and the Coastal, Georgia Strait and
     Lower Fraser Valley air zones were assigned to a green management level. 
     There are currently no 
     [air monitoring stations](http://www2.gov.bc.ca/gov/content?id=292EC5BD62A149A192B7DD2CE155E33E)
@@ -270,42 +254,14 @@ plots[["so2_mgmt_map"]]
 plots[["so2_mgmt_chart"]]
 ```
 
-#### More about the Air Quality Management System management levels:
-
--   ~~There can be cases when an air zone does not achieve a given
-    Canadian Ambient Air Quality Standard because of sources over which
-    jurisdictions have little or no control, such as those related to
-    transboundary flows and exceptional events, like forest fires.~~
--   ~~Prior to determining management levels, jurisdictions have the
-    option of adjusting their air zone metric values to remove such
-    external influences. These arrangements aim to ensure that
-    jurisdictions are responsible for managing only the emissions
-    sources they can control.~~
--   ~~Wildfires are generally the largest contributor to transboundary
-    flows and exceptional events in B.C. Over the `r year_range` reporting
-    period, `r #tfee$n_sites` stations had one or more days during the wildfire season
-    (May-October) where the daily sulphur dioxide
-    concentration was determined to be influenced by smoke from
-    wildfires and exceeded the 1-hour standard of 
-    `r so2_lvls[["so2_3yr"]]` ppb. The
-    majority of wildfire influences occurred in 2018 and 2020. Those daily
-    concentrations were removed from the calculations of management
-    levels, resulting in a change from red to orange for the Central Interior
-    and Georgia Strait air zones; from red to yellow for the Northeast air zone.~~
-
-<!-- See the summaries calculated in the starting RMD chunk for information 
-     needed to fill in the above bullet point. -->
 
 ### Methods
 
-~~The methods used to develop this indicator---including procedures, data
+The methods used to develop this indicator---including procedures, data
 requirements, and calculation of the Canadian Ambient Air Quality
-Standard sulphur dioxide metrics---are detailed in the [Guidance
-Document on Achievement Determination: Canadian Ambient Air Quality
-Standards for Fine Particulate Matter and Ozone (2012)
-](http://publications.gc.ca/pub?id=9.697756&sl=0)
+Standard sulphur dioxide metrics---are detailed in the [Guidance Document on Achievement Determination for Canadian Ambient Air Quality Standards for Sulphur Dioxide (2020)](https://www.ccme.ca/en/res/gdadforcaaqsforsulphurdioxide_en1.0.pdf)
 published by the [Canadian Council of Ministers of the
-Environment](http://www.ccme.ca).~~
+Environment](http://www.ccme.ca).
 
 **R package and code:** We have developed an
 [**R**](http://www.r-project.org) package to facilitate the calculation
@@ -318,10 +274,10 @@ the analysis presented on this page is also available on
 
 ### References and Other Useful Links
 
--   ~~Read individual [Air Zone
+-   Read individual [Air Zone
     reports](http://www2.gov.bc.ca/gov/search?id=04D14E7F7EE043889E1AC20E205CA3F8&tab=1&sourceId=267EE7E2432B4DE89BF1905EF80F505E&q=%22air+zone+report%22)
     on the achievement of the Canadian Ambient Air Quality Standards for
-    ground-level ozone and fine particulate matter in B.C.~~
+    various parameters in B.C.
 -   [Learn more about the implementation of the Air Quality Management
     System in British
     Columbia](http://www2.gov.bc.ca/gov/content?id=8FA84ADC845A49AB93E525A58D9D4A97)
@@ -340,23 +296,25 @@ the analysis presented on this page is also available on
 \*By accessing these datasets, you agree to the licence associated with
 each file, as indicated in parentheses below.
 
--   ~~[Indicator data: BC Sulphur Dioxide Canadian Ambient Air
+-   [Indicator data: BC Sulphur Dioxide Canadian Ambient Air
     Quality Standards
-    `r year_range`](https://catalogue.data.gov.bc.ca/dataset/699be99e-a9ba-403e-b0fe-3d13f84f45ab) (`r get_data_license("ogl-bc")`)~~
--   ~~[BC SO~2~ Hourly Data & Air Monitoring Station
-    locations](https://catalogue.data.gov.bc.ca/dataset/77eeadf4-0c19-48bf-a47a-fa9eef01f409) (`r get_data_license("ogl-bc")`)~~
+    `r year_range`](NEED LINK) (`r get_data_license("ogl-bc")`)
+-   [BC SO~2~ Hourly Data & Air Monitoring Station
+    locations](NEED LINK) (`r get_data_license("ogl-bc")`)
 -   [BC Air
     Zones](https://catalogue.data.gov.bc.ca/dataset/e8eeefc4-2826-47bc-8430-85703d328516) (`r get_data_license("ogl-bc")`)
 
-~~Published and Available On-Line at Environmental Reporting BC (April 2021):
-<http://www.env.gov.bc.ca/soe/indicators/air/fine_pm.html>~~
+Published and Available On-Line at Environmental Reporting BC (August 2022):
+<http://www.env.gov.bc.ca/soe/indicators/air/so2.html>
 
 Email correspondence to: envreportbc@gov.bc.ca
 
 *Suggested Citation*:  
-Environmental Reporting BC. 2021. Status of Suphur Dioxide in B.C. (`r year_range`). State of Environment Reporting, Ministry of Environment and Climate Change Strategy, British Columbia, Canada.
+Environmental Reporting BC. 2022. Status of Suphur Dioxide in B.C. (`r year_range`). State of Environment Reporting, Ministry of Environment and Climate Change Strategy, British Columbia, Canada.
 
-# Appendix: Detailed sulphur dioxide Candadian Ambient Air Quality Standard results for each monitoring station within air zones in B.C.
+\newpage
+
+# Appendix: Detailed sulphur dioxide Canadian Ambient Air Quality Standard results for each monitoring station within air zones in B.C.
 
 \vspace{1cm}
 

@@ -59,7 +59,7 @@ az_mgmt_sf <- az_mgmt %>%
          caaqs_ambient = replace_na(caaqs_ambient, levels(caaqs_ambient)[1]))
 
 stations_sf <- so2_results %>% 
-  st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
+  st_as_sf(coords = c("lon", "lat"), na.fail=FALSE, crs = 4326) %>%
   transform_bc_albers()
 
 # Numbers for print version 
