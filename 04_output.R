@@ -135,7 +135,7 @@ for(s in sites) {
 # Summary plot -------------------------------------------------------------
 # - For print version
 
-g <- summary_plot(so2_results, 
+g <- summary_plot(filter(so2_results, !is.na(airzone)), 
                   metric_val = "metric_value_ambient", 
                   airzone = "airzone", station = "site", 
                   parameter = "metric", pt_size = 2, 
@@ -147,16 +147,16 @@ print_plots[["so2_ambient_summary_plot"]]<- g
 # - For print version
 
 g <- achievement_map(
-  az_data = filter(az_ambient_sf, metric == "so2_3yr"),
-  stn_data = filter(stations_sf, metric == "so2_3yr"),
+  az_data = filter(az_ambient_sf, metric == "so2_3yr"& !is.na(airzone)),
+  stn_data = filter(stations_sf, metric == "so2_3yr"& !is.na(airzone)),
   az_labs = "**Airzones:**<br>SO<sub>2</sub> 1-Hr Air Quality Standard",
   stn_labs = "**Monitoring Stations:**<br>SO<sub>2</sub> 1-Hr Metric (ppb)")
 print_plots[["achievement_map_3yr"]] <- g
 
 
 g <- achievement_map(
-  az_data = filter(az_ambient_sf, metric == "so2_1yr"),
-  stn_data = filter(stations_sf, metric == "so2_1yr"),
+  az_data = filter(az_ambient_sf, metric == "so2_1yr" & !is.na(airzone)),
+  stn_data = filter(stations_sf, metric == "so2_1yr"& !is.na(airzone)),
   az_labs = "**Airzones:**<br>SO<sub>2</sub> Annual Air Quality Standard",
   stn_labs = "**Monitoring Stations:**<br>SO<sub>2</sub> Annual Metric (ppb)")
 print_plots[["achievement_map_1yr"]] <- g
@@ -187,7 +187,7 @@ g <- ggplot(az_mgmt_sf) +
         axis.text = element_blank(), 
         axis.ticks = element_blank(),
         panel.grid = element_blank(),
-        legend.position = c(0.25, 0.12), legend.direction = "vertical",
+        legend.position = "none", 
         plot.margin = unit(c(0,0,0,0),"mm")) +
   geom_text(data = labels_df, aes(x = x, y = y, label = airzone_name), 
             colour = "black", size = 6)
@@ -196,11 +196,11 @@ print_plots[["so2_mgmt_map"]] <- g
 
 # SVG of airzone CAAQS mgmt level map
 ggsave("out/so2_caaqs_mgmt_map.svg", plot = g, dpi = 72,
-       width = 500, height = 450, units = "px", bg = "white")
+       width = 500, height = 500, units = "px", bg = "white")
 
 ## Bar Chart --------------
 
-g <- ggplot(data = so2_results, aes(x = metric, fill = mgmt_level)) + 
+g <- ggplot(data = filter(so2_results, !is.na(airzone)), aes(x = metric, fill = mgmt_level)) + 
   geom_bar(alpha = 1, width = 0.8) +
   facet_wrap(~ airzone, ncol = 1) +
   xlab("") + ylab("Number of Reporting Stations") +
