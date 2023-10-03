@@ -38,7 +38,14 @@ stations <- read_csv("data/raw/caaqs_stationlist.csv", show_col_types = FALSE) %
   clean_names() %>%
   rename(lon = long)
 
+#remove non-AQMS sites
+lst_remove <- stations %>%
+  select(site,aqms) %>%
+  filter(aqms == 'N') %>%
+  pull(site)
+
 so2 <- read_rds("data/raw/so2_caaqs.Rds") %>%
+  filter(!site %in% lst_remove) %>%
   as_tibble()
 
 az <- airzones()
@@ -66,6 +73,12 @@ stations_clean <- stations %>%
   filter(so2) %>%
   select(site, region, airzone, lat, lon)
 
+# remove duplicated entries
+stations_clean <- stations_clean %>%
+  ungroup() %>%
+  group_by(site) %>%
+  slice(1) %>%
+  ungroup()
 # Clean so2 -----------------------------------------------------------------
 
 ## Overall clean -------------
@@ -113,3 +126,4 @@ stations_clean <- semi_join(stations_clean, so2_clean, by = "site")
 # Write data ------------------------------
 write_rds(stations_clean, "data/datasets/stations_clean.rds")
 write_rds(so2_clean, "data/datasets/so2_clean.rds", compress = "gz")
+
