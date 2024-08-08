@@ -19,7 +19,7 @@
 # renv::update()   # - Update renv packages - best done at the start of an analysis update
 # renv::snapshot() # - As needed to keep renv packages up-to-date
 
-renv::restore()   # - When updating from GitHub etc. restore to packages in lockfile
+#renv::restore()   # - When updating from GitHub etc. restore to packages in lockfile
 
 library("magrittr")
 
@@ -38,7 +38,7 @@ rep_year <- 2021
 # Achievement maps - used in 04_output.R
 achievement_map <- function(az_data, stn_data, az_labs, stn_labs) {
   ggplot() + 
-    geom_sf(data = az_data, aes(fill = caaqs_ambient), colour = "white") + 
+    geom_sf(data = az_data, aes(fill = caaqs_ambient), colour = "white", show.legend = TRUE) + 
     geom_sf(data = stn_data, aes(colour = metric_value_ambient), size = 3) + 
     scale_fill_manual(
       values = get_colours(type = "achievement", drop_na = FALSE), 
