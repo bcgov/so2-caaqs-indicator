@@ -12,14 +12,6 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-# Setup renv ---------------------------
-# - for reproducibility
-
-# renv::init()     # - Only needs be done to get things started, no longer necessary
-# renv::update()   # - Update renv packages - best done at the start of an analysis update
-# renv::snapshot() # - As needed to keep renv packages up-to-date
-
-#renv::restore()   # - When updating from GitHub etc. restore to packages in lockfile
 
 library("magrittr")
 
