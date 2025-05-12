@@ -71,13 +71,14 @@ stations <- read_sf(here("out/so2_stations_mgmt.geojson")) %>%
     metrics = c("3yr", "1yr"), 
     metric_names = c("1-hour Metric", "Annual Metric"),
     units = units_html[1],
-    plot_loc = "./leaflet_map/station_plots",
+    # plot_loc = "./leaflet_map/station_plots",
     airzone = "airzone", 
     station_name = "site", 
     station_id = "site", 
     value1 = "metric_value_mgmt_3yr", 
     value2 = "metric_value_mgmt_1yr",
-    level1 = "mgmt_level"))
+    level1 = "mgmt_level"))%>% 
+  mutate(popup = str_replace(popup, '//', '/'))
 
 ## Count stations
 stns_n <- stations %>%
@@ -118,7 +119,8 @@ az <- st_read(here("./out/so2_airzones_mgmt.geojson")) %>%
     level1 = "caaqs_ambient"),
     # Where insufficient data, keep the tool tip but omit the popup
     popup = if_else(caaqs_ambient == "Insufficient Data", 
-                    list(NA_character_), popup))
+                    list(NA_character_), popup))%>% 
+  mutate(popup = str_replace(popup, '//', '/'))
 
 
 # Start splitting metrics ----------------------
