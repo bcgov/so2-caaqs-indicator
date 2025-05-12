@@ -73,7 +73,6 @@ stations_clean <- stations %>%
   assert(not_na, airzone) %>%
   
   # Only keep stations for so2
-  filter(so2) %>%
   select(site, region, airzone, lat, lon)
 
 # remove duplicated entries
