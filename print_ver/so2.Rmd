@@ -305,7 +305,7 @@ Published and Available On-Line at Environmental Reporting BC:
 Email correspondence to: envreportbc@gov.bc.ca
 
 *Suggested Citation*:  
-Environmental Reporting BC. `r format(Sys.Date(), "%Y")`. Status of Suphur Dioxide in B.C. (`r year_range`). State of Environment Reporting, Ministry of Environment and Climate Change Strategy, British Columbia, Canada.
+Environmental Reporting BC. `r format(Sys.Date(), "%Y")`. Status of Suphur Dioxide in B.C. (`r year_range`). State of Environment Reporting, Ministry of Environment and Parks, British Columbia, Canada.
 
 \newpage
 
