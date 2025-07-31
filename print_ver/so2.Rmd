@@ -1,12 +1,12 @@
 ---
-title: "Status of Sulphur Dioxide in B.C. (2019-2021)"
+title: "Status of Sulphur Dioxide in B.C. (2020-2022)"
 output:
   pdf_document: envreportutils.internal::print_ver
 topic: air
 ---
 
 <!--
-Copyright 2022 Province of British Columbia
+Copyright 2025 Province of British Columbia
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ knitr_latex_char <- function(x) {
   return(y)
 }
 
-year_range <- "2019-2021"
+year_range <- "2020-2022"
 
 # Data from 04_outputs.R
 plots <- read_rds(here("data/datasets/print_plots.rds"))
@@ -141,7 +141,7 @@ diesel vehicles are additional sources of SO~2~.^[1](#fn1)^
     (`r print_summary$percent_achieved[print_summary$metric == "so2_3yr"]`%) 
     with sufficient data for analysis.
 -   **Sulphur dioxide levels met both of the Canadian Ambient
-    Air Quality Standards in five of B.C.'s seven air zones.** The Coastal, Central Interior, Georgia Strait, Northeast, and Lower Fraser Valley air zones met both the annual and 1-hour standards. The Southern Interior exceeded both standards. 
+    Air Quality Standards in five of B.C.'s seven air zones.** The Coastal, Central Interior, Georgia Strait, Northeast, and Lower Fraser Valley air zones met both the annual and 1-hour standards. The Southern Interior exceeded the 1-hour standard. 
     Currently, there are no 
     [air monitoring stations](http://www2.gov.bc.ca/gov/content?id=292EC5BD62A149A192B7DD2CE155E33E)
     in the Northwest air zone.
@@ -293,9 +293,9 @@ each file, as indicated in parentheses below.
 
 -   [Indicator data: BC Sulphur Dioxide Canadian Ambient Air
     Quality Standards
-    `r year_range`](NEED LINK) (`r get_data_license("ogl-bc")`)
+    `r year_range`](https://catalogue.data.gov.bc.ca/dataset/646bb2ae-e2de-46b7-b377-39b56abff79e) (`r get_data_license("ogl-bc")`)
 -   [BC SO~2~ Hourly Data & Air Monitoring Station
-    locations](NEED LINK) (`r get_data_license("ogl-bc")`)
+    locations](https://catalogue.data.gov.bc.ca/dataset/77eeadf4-0c19-48bf-a47a-fa9eef01f409) (`r get_data_license("ogl-bc")`)
 -   [BC Air
     Zones](https://catalogue.data.gov.bc.ca/dataset/e8eeefc4-2826-47bc-8430-85703d328516) (`r get_data_license("ogl-bc")`)
 
@@ -305,7 +305,7 @@ Published and Available On-Line at Environmental Reporting BC:
 Email correspondence to: envreportbc@gov.bc.ca
 
 *Suggested Citation*:  
-Environmental Reporting BC. 2024. Status of Suphur Dioxide in B.C. (`r year_range`). State of Environment Reporting, Ministry of Environment and Climate Change Strategy, British Columbia, Canada.
+Environmental Reporting BC. `r format(Sys.Date(), "%Y")`. Status of Suphur Dioxide in B.C. (`r year_range`). State of Environment Reporting, Ministry of Environment and Parks, British Columbia, Canada.
 
 \newpage
 
