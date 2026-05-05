@@ -36,8 +36,7 @@ options("rcaaqs.timezone" = "Etc/GMT+8")
 # Load Data ---------------------------------
 stations <- read_csv("data/raw/caaqs_stationlist.csv", show_col_types = FALSE) %>%
   clean_names() %>%
-  mutate(site = gsub('#','',site)) %>%
-  rename(lon = long)
+  mutate(site = gsub('#','',site)) 
 
 #remove non-AQMS sites
 lst_remove <- stations %>%
@@ -91,12 +90,13 @@ so2_clean <- so2 %>%
   assert(in_set(FALSE), flag_tfee) %>%
 
   # Format dates, only keep dates in range
-  mutate(date_time = format_caaqs_dt(date_time), 
-         year = year(date_time)) %>% 
+  # mutate(date_time = format_caaqs_dt(date_time), 
+  #        year = year(date_time)) %>% 
+  mutate(year = year(date_time)) %>% 
   filter(year <= rep_year) %>% 
   
   # Clean negative values
-  mutate(value = clean_neg(value, type = "so2")) %>% 
+  mutate(value = clean_neg(value, type = "so2")) %>%
   
   # Fill dates
   nest(data = -site) %>%
