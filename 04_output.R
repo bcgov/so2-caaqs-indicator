@@ -236,7 +236,10 @@ g <- ggplot(data = filter(so2_results, !is.na(airzone)), aes(x = metric, fill = 
   theme_soe_facet() +
   theme(panel.grid.major.y = (element_blank()),
         axis.text = element_text(size = 14),
+        axis.text.y = element_text(hjust  = 1),
         axis.title = element_text(size = 14),
+        axis.ticks.y = element_line(colour = "transparent"),
+        axis.ticks.length.y = unit(4, "pt"),
         legend.position = "bottom",
         legend.direction = "vertical",
         legend.box.just = "left",
