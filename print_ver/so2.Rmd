@@ -131,9 +131,7 @@ summarise_year <- function(df, y) {
 summary_prev <- summarise_year(so2_results_combined, year_prev)
 ```
 
-British Columbia operates a network of air monitoring stations that
-measure sulphur dioxide and other air pollutants. This iteration of the indicator reports on the concentration of sulphur dioxide from two time periods, `r year_range_previous` and `r year_range`.  The data is reported in three-year and annual averages to the [Canadian Ambient Air Quality Standards](https://www.ccme.ca/en/air-quality-report#slide-7)
-established by the [Canadian Council of Ministers of the Environment](http://www.ccme.ca).
+British Columbia has a network of air quality monitoring stations that measure sulphur dioxide and other air contaminants. This indicator reports on the concentration of sulphur dioxide from two reporting periods, `r year_range_previous` and `r year_range`. The data are reported as two metrics: an annual metric based on one year of data, and a 1-hour metric based on three consecutive years of data. These metrics are compared against the [Canadian Ambient Air Quality Standards](https://www.ccme.ca/en/air-quality-report#slide-7) to determine achievement and to define colour-based management levels. CAAQS were established by the [Canadian Council of Ministers of the Environment](http://www.ccme.ca) in 2012 as a key element of the Air Quality Management System that collaboratively and comprehensively manages air quality in Canada.
 
 \begin{center}
 
@@ -146,13 +144,13 @@ established by the [Canadian Council of Ministers of the Environment](http://www
       
       \vspace{1mm}
           
-      SO$_{\text{2}}$ levels are calculated using \textbf{two} \hyperref[metric-info]{statistical forms called the annual and the 1-hour metrics}. The Canadian Ambient Air Quality Standard value for SO$_{\text{2}}$ annual is \textbf{`r so2_lvls[["so2_1yr"]]` parts per billion} and the standard value for SO$_{\text{2}}$ 1-hour is \textbf{`r so2_lvls[["so2_3yr"]]`} parts per billion
+      SO$_{\text{2}}$ levels are calculated using \textbf{two} \hyperref[metric-info]{statistical forms called the annual metric and the 1-hour metric}. The Canadian Ambient Air Quality Standard value for SO$_{\text{2}}$ annual is \textbf{`r so2_lvls[["so2_1yr"]]` parts per billion} and the standard value for SO$_{\text{2}}$ 1-hour is \textbf{`r so2_lvls[["so2_3yr"]]`} parts per billion
           
       \vspace{2mm}
       
       SO$_{\text{2}}$ standards are achieved when annual levels are 
-      $\leq$`r so2_lvls[["so2_1yr"]]` ppb and 
-      1-hour levels are $\leq$`r so2_lvls[["so2_3yr"]]` ppb.
+      $\leq$`r so2_lvls[["so2_1yr"]]` ppb or lower and 
+      1-hour levels are $\leq$`r so2_lvls[["so2_3yr"]]` ppb or lower. More stringent 2025 CAAQS for SO$_{\text{2}}$ apply in the next reporting period (2023-2025), with an annual metric of 4 ppb and 1-hour metric of 65 ppb. 
           
   \end{minipage}
 }
@@ -176,19 +174,15 @@ established by the [Canadian Council of Ministers of the Environment](http://www
 \end{center}
 \vspace{2mm}
 
--   **Sulphur dioxide is  a colourless gas with a pungent odour at higher concentrations.** The largest sources of SO~2~ in B.C. include the oil and gas sector, the pulp and paper sector, and metal smelters. Marine vessels and off-road
-diesel vehicles are additional sources of SO~2~.^[1](#fn1)^
--   **Sulphur dioxide can be harmful to humans and the environment.** Short-term exposure to elevated
-    sulphur dioxide can cause difficulties breathing for asthmatics. The long-term impacts of sulphur dioxide exposure are not well understood. Increased sulphur dioxide in the environment can affect vegetation and aquatic ecosystems through acid rain deposition ^[1](#fn1)^.
--   **2021-2023: sulphur dioxide levels met the Canadian Ambient Air
-    Quality Standards at `r min(summary_prev$pct_achieved)`
-    percent of assessed monitoring stations in B.C.** There are two standards 
-    for SO~2~---an annual standard and a
+-   **Sulphur dioxide is a colourless gas with a pungent odour at higher concentrations.** The largest sources of SO2 in B.C. include the oil and gas sector, the pulp and paper sector, and metal smelters. Marine vessels and off-road diesel vehicles are also significant sources of SO~2~ ([Air Pollutant Emissions Inventory Report 2026](https://www.canada.ca/en/environment-climate-change/services/air-pollution/publications/emissions-inventory-report-2026.html))
+-   **Sulphur dioxide can be harmful to humans and the environment.** Short-term exposure to elevated SO2 can cause difficulty breathing for asthmatics. The long-term impacts of SO2 exposure are not well understood. Increased SO2 in the environment can affect vegetation and aquatic ecosystems through acid rain deposition ([Health Canada, 2016](https://www.canada.ca/en/health-canada/services/publications/healthy-living/human-health-risk-assessment-sulphur-dioxide-executive-summary.html)).
+-   **2021-2023: sulphur dioxide levels met the Canadian Ambient Air Quality Standards at `r min(summary_prev$pct_achieved)`
+    percent of assessed monitoring stations in B.C.** There are two standards for SO~2~---an annual standard and a
     1-hour standard  (see sidebar). The annual standard was met at 
     `r summary_prev$n_achieved[summary_prev$metric == "so2_1yr"]` of the 
     `r summary_prev$n_stations[summary_prev$metric == "so2_1yr"]` stations 
     (`r summary_prev$pct_achieved[summary_prev$metric == "so2_1yr"]`%) 
-    for which valid data was obtained, while the 1-hour standard was met at 
+    for which valid data were obtained, while the 1-hour standard was met at 
     `r summary_prev$n_achieved[summary_prev$metric == "so2_3yr"]` of the 
     `r summary_prev$n_stations[summary_prev$metric == "so2_3yr"]` stations 
     (`r summary_prev$pct_achieved[summary_prev$metric == "so2_3yr"]`%) 
@@ -199,16 +193,13 @@ diesel vehicles are additional sources of SO~2~.^[1](#fn1)^
     `r print_summary$n_achieved[print_summary$metric == "so2_1yr"]` of the 
     `r print_summary$n[print_summary$metric == "so2_1yr"]` stations 
     (`r print_summary$percent_achieved[print_summary$metric == "so2_1yr"]`%) 
-    for which valid data was obtained, while the 1-hour standard was met at 
+    for which valid data were obtained, while the 1-hour standard was met at 
     `r print_summary$n_achieved[print_summary$metric == "so2_3yr"]` of the 
     `r print_summary$n[print_summary$metric == "so2_3yr"]` stations 
     (`r print_summary$percent_achieved[print_summary$metric == "so2_3yr"]`%) 
     with sufficient data for analysis.
 -   **In both periods, sulphur dioxide levels met the annual Canadian Ambient
-    Air Quality Standard in `r as.character(english(summary_prev$az_achieved[summary_prev$metric=="so2_1yr"]))` of B.C.'s seven air zones, and met the 1-hour Standard in `r as.character(english(summary_prev$az_achieved[summary_prev$metric=="so2_3yr"]))` air zones.** The Coastal, Central Interior, Georgia Strait, Northeast, and Lower Fraser Valley air zones met both the annual and 1-hour standards. The Southern Interior exceeded the 1-hour standard. 
-    Currently, there are no 
-    [air monitoring stations](http://www2.gov.bc.ca/gov/content?id=292EC5BD62A149A192B7DD2CE155E33E)
-    in the Northwest air zone.
+    Air Quality Standard in `r as.character(english(summary_prev$az_achieved[summary_prev$metric=="so2_1yr"]))` of B.C.'s seven air zones, and met the 1-hour Standard in `r as.character(english(summary_prev$az_achieved[summary_prev$metric=="so2_3yr"]))` air zones.** The Coastal, Central Interior, Georgia Strait, Northeast, and Lower Fraser Valley air zones met both the annual and 1-hour standards. The Southern Interior air zone exceeded the 1-hour standard. Currently, there are no [air monitoring stations](http://www2.gov.bc.ca/gov/content?id=292EC5BD62A149A192B7DD2CE155E33E) in the Northwest air zone.
     <!-- See the summaries calculated in the starting RMD chunk for information 
      needed to fill in the above bullet point. -->
 -   **Sulphur dioxide levels are used to set management levels
@@ -217,13 +208,11 @@ diesel vehicles are additional sources of SO~2~.^[1](#fn1)^
     more rigorous as sulphur dioxide levels approach the
     Canadian Ambient Air Quality Standards.
     
-    
-
-The maps and chart below summarise the Canadian Ambient Air Quality Standard 
+The maps and charts below summarise the Canadian Ambient Air Quality Standard 
 achievement status for sulphur dioxide in B.C. air zones, as
 well as both the annual and 1-hour SO~2~ levels at individual
 monitoring stations. Summaries are given for each monitoring station where
-sufficient data was available for the `r year_range` and `r year_range_previous` reporting periods.
+sufficient data were available for the `r year_range` and `r year_range_previous` reporting periods.
 
 # Status of 1-hour SO~2~ Levels in B.C. Air Zones (`r year_range`)
 
@@ -272,23 +261,16 @@ plots_2023[["so2_ambient_summary_plot"]]
 ```
 
 \hyperdef{}{metric-info}{}
-### More about the Canadian Ambient Air Quality Standard sulphur dioxide metrics:
+### More about the Canadian Ambient Air Quality Standard for sulphur dioxide metrics:
 
 -   There are two Canadian Ambient Air Quality Standards for sulphur dioxide 
     (SO~2~). The statistical form of the SO~2~ annual
-    metric is the average over a single calendar year of all 1-hour average 
-    average concentration of SO~2~. The statistical form of the SO~2~ 1-hour 
-    metric is the average of the annual 99th percentile of the daily 
-    maximum 1-hour average concentrations of SO~2~.
+    metric is the average of the annual average concentration of SO~2~. The statistical form of the SO~2~ 1-hour 
+    metric is the average of the annual 99th percentile of the daily maximum 1-hr average concentration of SO~2~.
 -   The SO~2~ metric for an air zone is the highest SO~2~ metric value
     reported from monitoring stations within the air zone. 
--   Air quality monitoring stations with at least two years of valid data from `r year_range` and `r year_range_previous`
-    were included in this indicator. Visit [Current Air Quality
-    Data](http://www2.gov.bc.ca/gov/content?id=292EC5BD62A149A192B7DD2CE155E33E)
-    for a complete list of air monitoring stations across B.C.
--   Criteria for data completeness and sufficiency of the two SO~2~ metrics
-    are described in the [Guidance Document on Achievement
-    Determination for Canadian Ambient Air Quality Standards for Sulphur Dioxide (2020)](https://www.ccme.ca/en/res/gdadforcaaqsforsulphurdioxide_en1.0.pdf).
+-   Air quality monitoring stations with at least two years of valid data from 2022-2024 were included in this indicator. Visit  [Current Air Quality Data](http://www2.gov.bc.ca/gov/content?id=292EC5BD62A149A192B7DD2CE155E33E) for a complete list of currently active air quality monitoring stations across B.C.
+-   Criteria for data completeness and sufficiency of the two SO~2~ metrics are described in the [Guidance Document on Achievement Determination for Canadian Ambient Air Quality Standards for Sulphur Dioxide (2020)](https://www.ccme.ca/en/res/gdadforcaaqsforsulphurdioxide_en1.0.pdf).
     
 ### Canada-wide Air Quality Management System
 
@@ -369,23 +351,18 @@ the analysis presented on this page is also available on
 
 ### References and Other Useful Links
 
--   Read individual [Air Zone
-    reports](http://www2.gov.bc.ca/gov/search?id=04D14E7F7EE043889E1AC20E205CA3F8&tab=1&sourceId=267EE7E2432B4DE89BF1905EF80F505E&q=%22air+zone+report%22)
-    on the achievement of the Canadian Ambient Air Quality Standards for
-    various parameters in B.C.
--   [Learn more about the implementation of the Air Quality Management
-    System in British
-    Columbia](http://www2.gov.bc.ca/gov/content?id=8FA84ADC845A49AB93E525A58D9D4A97)
 -   [Access B.C.'s real-time data on air pollutants and find locations of all provincial air monitoring stations in B.C.](http://www2.gov.bc.ca/gov/content?id=292EC5BD62A149A192B7DD2CE155E33E)
--   [BC Lung Association's BC State of the Air
-    Reports](https://bc.lung.ca/state-air-report)
+-   [Air Pollutant Emissions Inventory Report 2026](https://www.canada.ca/en/environment-climate-change/services/air-pollution/publications/emissions-inventory-report-2026.html)
+-   [BC Lung Association's BC State of the Air Reports](https://bclung.ca/lung-health/air-quality/state-of-the-air-report-archives/)
 -   [Canadian Ambient Air Quality Standards](https://www.ccme.ca/en/air-quality-report#slide-7)
 -   [Canadian Council of Ministers of the Environment](https://www.ccme.ca/en)
--   [Canadian Environmental Sustainability Indicators: Air 
-    Indicators](https://www.canada.ca/en/environment-climate-change/services/environmental-indicators/air.html)
+-   [Canadian Environmental Sustainability Indicators: Air Indicators](https://www.canada.ca/en/environment-climate-change/services/environmental-indicators/air.html)
+-   [Canadian Smog Science Assessment: Highlights and Key Messages](http://publications.gc.ca/site/eng/9.694820/publication.html)
 -   [Guidance Document on Achievement Determination: Canadian Ambient Air Quality Standards for Sulphur Dioxide (2020)](https://www.ccme.ca/en/res/gdadforcaaqsforsulphurdioxide_en1.0.pdf)
 -   [Guidance Document on Air Zone Management](https://ccme.ca/en/res/guidancedocumentonairzonemanagement_secured.pdf)
--   [Canadian Smog Science Assessment: Highlights and Key Messages](http://publications.gc.ca/site/eng/9.694820/publication.html)
+-   [Health Canada](https://publications.gc.ca/collections/collection_2022/sc-hc/H144-100-2022-eng.pdf)
+-   [Learn more about the implementation of the Air Quality Management System in British Columbia](http://www2.gov.bc.ca/gov/content?id=8FA84ADC845A49AB93E525A58D9D4A97)
+-   Read individual [Air Zone reports](http://www2.gov.bc.ca/gov/search?id=04D14E7F7EE043889E1AC20E205CA3F8&tab=1&sourceId=267EE7E2432B4DE89BF1905EF80F505E&q=%22air+zone+report%22) on the achievement of the Canadian Ambient Air Quality Standards in B.C.
 
 ### Data
 
