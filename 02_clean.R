@@ -1,4 +1,4 @@
-# Copyright 2025 Province of British Columbia
+# Copyright 2026 Province of British Columbia
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
@@ -36,8 +36,8 @@ options("rcaaqs.timezone" = "Etc/GMT+8")
 # Load Data ---------------------------------
 stations <- read_csv("data/raw/caaqs_stationlist.csv", show_col_types = FALSE) %>%
   clean_names() %>%
-  mutate(site = gsub('#','',site)) %>%
-  rename(lon = long)
+  mutate(site = gsub('#','',site)) #%>%
+  #rename(lon = long)
 
 #remove non-AQMS sites
 lst_remove <- stations %>%
@@ -64,6 +64,8 @@ stations_clean <- stations %>%
   # Look for problems
   assert(within_bounds(-90, 90), lat) %>%
   assert(within_bounds(-180, 180), lon) %>%
+  
+  filter(!is.na(lat)) %>%
 
   # Use airzones from bcmaps
   select(-airzone) %>%
@@ -104,6 +106,20 @@ so2_clean <- so2 %>%
     data, ~date_fill(., date_col = "date_time", interval = "1 hour"))) %>%
   unnest(data)
 
+
+## Aggregate sub-hourly SO2 data to hourly
+## ------------------------------------------------------------
+## rcaaqs::so2_3yr_caaqs() requires hourly-averaged SO2 inputs.
+## One monitoring site (e.g., Victoria James Bay - The Reef)
+## reports SO2 at sub-hourly resolution (e.g., 1-minute).
+## To ensure consistent temporal resolution across all sites and
+## compliance with CAAQS methodology, sub-hourly observations are
+## averaged to hourly values prior to CAAQS calculations.
+
+so2_clean <- so2_clean %>%
+     group_by(site, date_time = lubridate::floor_date(date_time, "hour")) %>%
+     summarize(value = mean(value, na.rm = TRUE), .groups = "drop")
+
 ## Check timeseries problems -----------------------
 # - Check for missing/extra observations
 
@@ -127,6 +143,6 @@ t <- so2_clean %>%
 stations_clean <- semi_join(stations_clean, so2_clean, by = "site")
 
 # Write data ------------------------------
-write_rds(stations_clean, "data/datasets/stations_clean.rds")
-write_rds(so2_clean, "data/datasets/so2_clean.rds", compress = "gz")
+write_rds(stations_clean, file.path(rep_dir_data,"stations_clean.rds"))
+write_rds(so2_clean, file.path(rep_dir_data,"so2_clean.rds"), compress = "gz")
 
